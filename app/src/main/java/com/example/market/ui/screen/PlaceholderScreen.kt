@@ -118,7 +118,7 @@ fun ProfileUserCard() {
                 
                 Column {
                     Text(
-                        text = "用户_12345",
+                        text = "Kratos",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
