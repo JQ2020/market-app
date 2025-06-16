@@ -8,7 +8,7 @@
 
 **扫码下载 APK 文件** | **版本: v1.0.0** | **大小: ~19MB**
 
-[📥 直接下载 APK](https://github.com/JQ2020/market-app/raw/main/apk/app-debug.apk) | [🔗 GitHub 仓库](https://github.com/JQ2020/market-app)
+[�� 直接下载 APK](https://raw.githubusercontent.com/JQ2020/market-app/main/apk/app-debug.apk) | [🔗 GitHub 仓库](https://github.com/JQ2020/market-app)
 
 ---
 
