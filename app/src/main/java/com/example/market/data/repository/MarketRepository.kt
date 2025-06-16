@@ -6,8 +6,32 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
+/**
+ * 应用商店数据仓库类
+ * 负责提供应用商店所需的所有数据，包括横幅、应用列表等
+ * 
+ * 主要功能：
+ * - 提供轮播横幅数据
+ * - 按分类获取应用列表
+ * - 模拟网络请求延迟
+ * - 管理不同类型的应用数据集合
+ * 
+ * 数据来源：
+ * 当前使用模拟数据，实际项目中可替换为网络API调用
+ * 
+ * 设计模式：
+ * - Repository模式：抽象数据访问层
+ * - Flow异步流：支持响应式编程
+ * - 单例模式：全局唯一的数据访问点
+ */
 class MarketRepository {
     
+    /**
+     * 获取轮播横幅数据
+     * 返回首页顶部轮播区域显示的横幅列表
+     * 
+     * @return Flow<List<BannerItem>> 横幅数据流
+     */
     fun getBannerItems(): Flow<List<BannerItem>> = flow {
         delay(300) // 模拟网络延迟
         emit(
@@ -23,13 +47,26 @@ class MarketRepository {
         )
     }
     
+    /**
+     * 获取精选应用列表
+     * 返回首页默认显示的精选应用
+     * 
+     * @return Flow<List<AppItem>> 精选应用数据流
+     */
     fun getFeaturedApps(): Flow<List<AppItem>> = flow {
         delay(300) // 模拟网络延迟
         emit(getFeaturedAppsList())
     }
     
+    /**
+     * 根据分类获取应用列表
+     * 支持多种应用分类，返回对应的应用数据
+     * 
+     * @param category 应用分类（精选、应用时刻、小游戏、热门、必备）
+     * @return Flow<List<AppItem>> 对应分类的应用数据流
+     */
     fun getAppsByCategory(category: String): Flow<List<AppItem>> = flow {
-        delay(300)
+        delay(300) // 模拟网络延迟
         val apps = when (category) {
             "精选" -> getFeaturedAppsList()
             "应用时刻" -> getPopularAppsList()
@@ -41,6 +78,12 @@ class MarketRepository {
         emit(apps)
     }
     
+    /**
+     * 获取精选应用数据集合
+     * 包含游戏、金融、阅读等多种类型的优质应用
+     * 
+     * @return List<AppItem> 精选应用列表
+     */
     private fun getFeaturedAppsList() = listOf(
         AppItem(
             id = "1",
@@ -89,6 +132,12 @@ class MarketRepository {
         )
     )
     
+    /**
+     * 获取热门应用数据集合
+     * 包含微信、QQ、支付宝等国民级应用
+     * 
+     * @return List<AppItem> 热门应用列表
+     */
     private fun getPopularAppsList() = listOf(
         AppItem(
             id = "p1",
@@ -137,6 +186,12 @@ class MarketRepository {
         )
     )
     
+    /**
+     * 获取游戏应用数据集合
+     * 包含王者荣耀、原神等热门手游
+     * 
+     * @return List<AppItem> 游戏应用列表
+     */
     private fun getGameAppsList() = listOf(
         AppItem(
             id = "g1",
@@ -185,6 +240,12 @@ class MarketRepository {
         )
     )
     
+    /**
+     * 获取热门应用数据集合
+     * 包含百度、美团、高德地图等实用工具
+     * 
+     * @return List<AppItem> 热门应用列表
+     */
     private fun getHotAppsList() = listOf(
         AppItem(
             id = "h1",
@@ -233,6 +294,12 @@ class MarketRepository {
         )
     )
     
+    /**
+     * 获取必备应用数据集合
+     * 包含银行、政务、安全等重要应用
+     * 
+     * @return List<AppItem> 必备应用列表
+     */
     private fun getEssentialAppsList() = listOf(
         AppItem(
             id = "e1",
