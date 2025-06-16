@@ -1,5 +1,19 @@
 # 📱 Android 应用商店
 
+<div align="center">
+
+## 📲 立即下载
+
+![APK下载二维码](qr_code_download.png)
+
+**扫码下载 APK 文件** | **版本: v1.0.0** | **大小: ~19MB**
+
+[📥 直接下载 APK](https://github.com/JQ2020/market-app/raw/main/apk/app-debug.apk) | [🔗 GitHub 仓库](https://github.com/JQ2020/market-app)
+
+---
+
+</div>
+
 一个基于 Jetpack Compose 开发的现代化 Android 应用商店，提供完整的应用浏览、搜索和管理功能。
 
 ## ✨ 功能特色
