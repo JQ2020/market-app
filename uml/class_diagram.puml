@@ -1,0 +1,99 @@
+@startuml
+!define RECTANGLE class
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 11
+skinparam packageFontSize 12
+skinparam backgroundColor white
+
+package "Data Models" {
+    class AppItem {
+        +name: String
+        +description: String
+        +rating: Float
+        +downloads: String
+        +iconColor: Long
+        +category: String
+    }
+    
+    class BannerItem {
+        +title: String
+        +description: String
+        +backgroundColor: Long
+    }
+}
+
+package "Repository" {
+    class MarketRepository {
+        +getHomeApps(): List<AppItem>
+        +getTrendingApps(): List<AppItem>
+        +getGames(): List<AppItem>
+        +getSoftware(): List<AppItem>
+        +getSocialApps(): List<AppItem>
+        +getMiniGames(): List<AppItem>
+        +getEssentialApps(): List<AppItem>
+        +getBanners(): List<BannerItem>
+        +getGameBanners(): List<BannerItem>
+        +getSoftwareBanners(): List<BannerItem>
+    }
+}
+
+package "ViewModels" {
+    class HomeViewModel {
+        -repository: MarketRepository
+        -_selectedTab: MutableStateFlow
+        -_isLoading: MutableStateFlow
+        +selectedTab: StateFlow
+        +isLoading: StateFlow
+        +apps: StateFlow
+        +banners: StateFlow
+        +selectTab(index: Int)
+        +loadApps()
+    }
+}
+
+package "UI Screens" {
+    class HomeScreen {
+        +invoke(viewModel: HomeViewModel)
+    }
+    
+    class GamesScreen {
+        +invoke()
+    }
+    
+    class SoftwareScreen {
+        +invoke()
+    }
+    
+    class BenefitsScreen {
+        +invoke()
+    }
+    
+    class PlaceholderScreen {
+        +invoke(title: String)
+    }
+    
+    class MainActivity {
+        +onCreate()
+    }
+}
+
+package "Navigation" {
+    abstract class Screen {
+        +route: String
+    }
+    
+    class HomeTab extends Screen
+    class GamesTab extends Screen
+    class BenefitsTab extends Screen
+    class SoftwareTab extends Screen
+    class ProfileTab extends Screen
+}
+
+MarketRepository ||--o{ AppItem
+MarketRepository ||--o{ BannerItem
+HomeViewModel --> MarketRepository
+HomeScreen --> HomeViewModel
+MainActivity --> Screen
+
+@enduml 

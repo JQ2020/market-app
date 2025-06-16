@@ -35,7 +35,8 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = viewModel()
+    viewModel: HomeViewModel = viewModel(),
+    onNavigateToSearch: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     
@@ -44,8 +45,7 @@ fun HomeScreen(
     ) {
         // 搜索栏
         SearchBar(
-            query = uiState.searchQuery,
-            onQueryChange = viewModel::onSearchQueryChanged
+            onNavigateToSearch = onNavigateToSearch
         )
         
         // 顶部Tab
@@ -124,8 +124,7 @@ fun HomeScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
-    query: String,
-    onQueryChange: (String) -> Unit
+    onNavigateToSearch: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -135,11 +134,12 @@ fun SearchBar(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         OutlinedTextField(
-            value = query,
-            onValueChange = onQueryChange,
+            value = "",
+            onValueChange = { },
             modifier = Modifier
                 .weight(1f)
-                .height(56.dp),
+                .height(56.dp)
+                .clickable { onNavigateToSearch() },
             placeholder = { 
                 Text(
                     "搜索应用...",
@@ -158,6 +158,8 @@ fun SearchBar(
                 unfocusedBorderColor = Color.Gray.copy(alpha = 0.3f)
             ),
             singleLine = true,
+            readOnly = true,
+            enabled = false,
             textStyle = androidx.compose.ui.text.TextStyle(fontSize = 14.sp)
         )
         

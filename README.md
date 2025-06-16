@@ -47,6 +47,27 @@
 - **网络**: WebView + Accompanist
 - **设计**: Material Design 3
 
+### 架构设计图
+
+#### 🏛️ MVVM 架构图
+![架构图](uml/architecture_diagram.png)
+
+本应用采用标准的 MVVM 架构模式，清晰分离了各个层次的职责：
+- **UI Layer**: Jetpack Compose 界面层，包含各个 Screen 组件
+- **ViewModel Layer**: 状态管理和业务逻辑处理
+- **Repository Layer**: 数据访问抽象层
+- **Data Layer**: 数据模型和数据源
+
+#### 📊 类图结构
+![类图](uml/class_diagram.png)
+
+展示了应用的核心类结构和它们之间的关系：
+- **Data Models**: AppItem、BannerItem 等数据模型
+- **Repository**: MarketRepository 提供数据访问接口
+- **ViewModels**: HomeViewModel 管理 UI 状态
+- **UI Screens**: 各个页面组件
+- **Navigation**: 导航路由管理
+
 ### 项目结构
 ```
 app/src/main/java/com/example/market/
@@ -164,9 +185,7 @@ implementation 'com.google.accompanist:accompanist-webview:0.32.0'
 
 ## 👨‍💻 作者
 
-- **开发者**: [Your Name]
-- **邮箱**: your.email@example.com
-- **GitHub**: [@your-username](https://github.com/your-username)
+- **开发者**: Kratos
 
 ## 🙏 致谢
 

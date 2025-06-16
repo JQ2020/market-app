@@ -14,8 +14,7 @@ data class HomeUiState(
     val bannerItems: List<BannerItem> = emptyList(),
     val featuredApps: List<AppItem> = emptyList(),
     val isLoading: Boolean = false,
-    val selectedTopTab: String = "精选",
-    val searchQuery: String = ""
+    val selectedTopTab: String = "精选"
 )
 
 class HomeViewModel(
@@ -55,10 +54,6 @@ class HomeViewModel(
             )
             loadDataForTab(tab)
         }
-    }
-    
-    fun onSearchQueryChanged(query: String) {
-        _uiState.value = _uiState.value.copy(searchQuery = query)
     }
     
     private fun loadDataForTab(tab: String) {

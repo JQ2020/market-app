@@ -2,6 +2,7 @@ package com.example.market.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -17,10 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.Image
+import com.example.market.R
 
 data class ManagementItem(
     val title: String,
@@ -110,9 +115,13 @@ fun ProfileUserCard() {
                         .background(Color(0xFF9C27B0)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = "👤",
-                        fontSize = 24.sp
+                    Image(
+                        painter = painterResource(id = R.drawable.user),
+                        contentDescription = "用户头像",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop
                     )
                 }
                 

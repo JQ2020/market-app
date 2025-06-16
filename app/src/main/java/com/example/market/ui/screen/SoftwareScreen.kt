@@ -28,7 +28,10 @@ import com.example.market.ui.viewmodel.HomeViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun SoftwareScreen(viewModel: HomeViewModel = viewModel()) {
+fun SoftwareScreen(
+    viewModel: HomeViewModel = viewModel(),
+    onNavigateToSearch: () -> Unit = {}
+) {
     val uiState by viewModel.uiState.collectAsState()
     
     LazyColumn(
@@ -40,7 +43,7 @@ fun SoftwareScreen(viewModel: HomeViewModel = viewModel()) {
     ) {
         // 搜索栏
         item {
-            SoftwareSearchBar()
+            SoftwareSearchBar(onNavigateToSearch = onNavigateToSearch)
         }
         
         // 软件横幅
@@ -67,7 +70,7 @@ fun SoftwareScreen(viewModel: HomeViewModel = viewModel()) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SoftwareSearchBar() {
+fun SoftwareSearchBar(onNavigateToSearch: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -79,7 +82,8 @@ fun SoftwareSearchBar() {
             onValueChange = { },
             modifier = Modifier
                 .weight(1f)
-                .height(56.dp),
+                .height(56.dp)
+                .clickable { onNavigateToSearch() },
             placeholder = { 
                 Text(
                     "搜索软件...",
@@ -98,6 +102,8 @@ fun SoftwareSearchBar() {
                 unfocusedBorderColor = Color.Gray.copy(alpha = 0.3f)
             ),
             singleLine = true,
+            readOnly = true,
+            enabled = false,
             textStyle = androidx.compose.ui.text.TextStyle(fontSize = 14.sp)
         )
         

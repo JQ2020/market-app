@@ -1,0 +1,73 @@
+@startuml
+!theme plain
+skinparam componentFontSize 12
+skinparam packageFontSize 14
+
+title Market App - MVVM Architecture
+
+package "UI Layer" {
+    component [MainActivity] as main
+    component [Jetpack Compose UI] as ui
+    
+    package "Screens" {
+        component [HomeScreen] as home
+        component [GamesScreen] as games
+        component [SoftwareScreen] as software
+        component [BenefitsScreen] as benefits
+        component [PlaceholderScreen] as profile
+    }
+    
+    component [Navigation Compose] as nav
+}
+
+package "ViewModel Layer" {
+    component [HomeViewModel] as viewmodel
+    component [StateFlow] as state
+}
+
+package "Repository Layer" {
+    component [MarketRepository] as repo
+}
+
+package "Data Layer" {
+    component [Mock Data] as data
+    
+    package "Models" {
+        component [AppItem] as app_model
+        component [BannerItem] as banner_model
+    }
+}
+
+package "External" {
+    component [WebView\n(OPPO Mall)] as webview
+}
+
+' UI Layer connections
+main --> ui
+ui --> nav
+nav --> home
+nav --> games
+nav --> software
+nav --> benefits
+nav --> profile
+
+' ViewModel connections
+home --> viewmodel
+viewmodel --> state
+
+' Repository connections
+viewmodel --> repo
+repo --> data
+repo --> app_model
+repo --> banner_model
+
+' External connections
+benefits --> webview
+
+' Layer boundaries
+note top of ui : Jetpack Compose\nMaterial Design 3
+note top of viewmodel : State Management\nBusiness Logic
+note top of repo : Data Access Layer
+note top of data : Mock Data Source
+
+@enduml 
